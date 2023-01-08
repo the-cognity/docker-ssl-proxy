@@ -18,6 +18,7 @@ http {
         listen ${SSL_PORT} ssl;
 
         client_max_body_size ${CLIENT_MAX_BODY_SIZE};
+        client_body_buffer_size ${CLIENT_MAX_BODY_SIZE};
         ssl_certificate     /etc/nginx/certs/cert.pem;
         ssl_certificate_key /etc/nginx/certs/key.pem;
 
@@ -40,6 +41,7 @@ http {
             proxy_set_header Upgrade           $http_upgrade;
             proxy_set_header Connection        $connection_upgrade;
             
+            proxy_temp_file_write_size 256K;
             proxy_buffer_size        128k;
             proxy_buffers            4 256k;
             proxy_busy_buffers_size  256k;
